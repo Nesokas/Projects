@@ -69,14 +69,21 @@ public class DataService {
 	public Colmeia InsertColmeia(string name, int day, int month, int year)
 	{
 		Colmeia colmeia = new Colmeia();
-		colmeia.SetName(name);
+		colmeia.name = name;
 		colmeia.SetDate(day,month,year);
 		_connection.Insert(colmeia);
 
-		_connection.Table<Colmeia>();
+	//	_connection.Table<Colmeia>();
 		Debug.Log(_connection.Table<Colmeia>().Count());
-
 		return colmeia;
+	}
+
+	public bool IsRepeatedName(string name)
+	{
+		if(_connection.Table<Colmeia>().Where(x => x.name == name).FirstOrDefault() == null)
+			return false;
+		else
+			return true;
 	}
 	/*
 	public Colection InsertCollection(string name_collection, int total_pacotes_collection)

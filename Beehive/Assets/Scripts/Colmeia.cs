@@ -6,7 +6,7 @@ public class Colmeia {
 
 	[PrimaryKey, AutoIncrement]
 	public int Id { get; set; }
-	private string name;
+	public string name{ get; set; }
 
 	private struct Date {
 		public int day;
@@ -25,11 +25,6 @@ public class Colmeia {
 
 	private Actions action;
 	private Date date;
-
-	public void SetName(string colmeia_name)
-	{
-		name = colmeia_name;
-	}
 
 	public void SetDate(int day, int month, int year)
 	{

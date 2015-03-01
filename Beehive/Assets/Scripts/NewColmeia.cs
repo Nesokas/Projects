@@ -7,7 +7,6 @@ using System.IO;
 public class NovaColeccao : MonoBehaviour {
 	
 	public InputField nome;
-	public InputField total;
 	
 	public InteractionManager interaction_manager;
 	public Image photo;
@@ -18,12 +17,11 @@ public class NovaColeccao : MonoBehaviour {
 	void OnEnable()
 	{
 		nome.text = "";
-		total.text = "";
 	}
 	
 	public void Guardar()
 	{
-		if(nome.text.Length > 0 && total.text.Length > 0){
+		if(nome.text.Length > 0){
 			Colmeia c = interaction_manager.ds.InsertColmeia(nome.text, 29,09,87);
 		//	manager.GotoVerColeccao(c.Id);
 		}
