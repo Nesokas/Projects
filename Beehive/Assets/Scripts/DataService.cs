@@ -51,6 +51,7 @@ public class DataService {
 		
 		var dbPath = filepath;
 #endif
+		Debug.Log(dbPath);
 		_connection = factory.Create(dbPath);
 		Debug.Log("Final PATH: " + dbPath);
 	}
@@ -59,23 +60,28 @@ public class DataService {
 	{
 #if UNITY_EDITOR
 		_connection.DropTable<Colmeia>();
-	//	_connection.DropTable<Pacote>();
+		_connection.DropTable<Evento>();
 #endif
 
 		_connection.CreateTable<Colmeia>();
-	//	_connection.CreateTable<Pacote>();
+		_connection.CreateTable<Evento>();
 	}
 
-	public Colmeia InsertColmeia(string name, int day, int month, int year)
+	public Colmeia InsertColmeia()
 	{
 		Colmeia colmeia = new Colmeia();
-		colmeia.name = name;
-		colmeia.SetDate(day,month,year);
 		_connection.Insert(colmeia);
 
 	//	_connection.Table<Colmeia>();
 		Debug.Log(_connection.Table<Colmeia>().Count());
 		return colmeia;
+	}
+
+	public Evento InsertEvento(Evento.TipoEvento tipo_evento, int colmeia_id, int day, int month, int year)
+	{
+		Evento evento = new Evento(tipo_evento, colmeia_id, day, month, year);
+		_connection.Insert(evento);
+		return evento;
 	}
 
 	public bool IsRepeatedName(string name)
@@ -85,6 +91,12 @@ public class DataService {
 		else
 			return true;
 	}
+
+	public IEnumerable<Evento> GetEventosInColmeia(int colmeia_id)
+	{
+		return _connection.Table<Evento>().Where(x => x.id == colmeia_id);
+	}
+
 	/*
 	public Colection InsertCollection(string name_collection, int total_pacotes_collection)
 	{
@@ -123,10 +135,7 @@ public class DataService {
 		return _connection.Table<Colection>().Where(x => x.Id == collection_id).FirstOrDefault();
 	}
 
-	public IEnumerable<Pacote> GetPacotesInColection(int colection_id)
-	{
-		return _connection.Table<Pacote>().Where(x => x.collection_id == colection_id);
-	}
+
 
 	public IEnumerable<Colection> GetAllCollections()
 	{

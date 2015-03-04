@@ -22,7 +22,7 @@ public class NovaColeccao : MonoBehaviour {
 	public void Guardar()
 	{
 		if(nome.text.Length > 0){
-			Colmeia c = interaction_manager.ds.InsertColmeia(nome.text, 29,09,87);
+			Colmeia c = interaction_manager.ds.InsertColmeia();
 		//	manager.GotoVerColeccao(c.Id);
 		}
 	}
