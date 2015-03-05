@@ -6,6 +6,7 @@ using System.IO;
 #endif
 using SQLite4Unity3d;
 using System.Collections.Generic;
+using System;
 
 public class DataService {
 
@@ -77,10 +78,12 @@ public class DataService {
 		return colmeia;
 	}
 
-	public Evento InsertEvento(Evento.TipoEvento tipo_evento, int colmeia_id, int day, int month, int year)
+	public Evento InsertEvento(Evento.TipoEvento tipo_evento, int colmeia_id)
 	{
-		Evento evento = new Evento(tipo_evento, colmeia_id, day, month, year);
+		Evento evento = new Evento(tipo_evento, colmeia_id);
+		evento.date = DateTime.Now;
 		_connection.Insert(evento);
+		Debug.Log(evento.date);
 		return evento;
 	}
 

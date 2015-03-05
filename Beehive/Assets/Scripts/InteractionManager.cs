@@ -56,7 +56,7 @@ public class InteractionManager : MonoBehaviour {
 
 	public void PressAdicionarEventoA()
 	{
-		Evento e = ds.InsertEvento(Evento.TipoEvento.ACCAO_A, current_colmeia_id, 29, 09, 87);
+		Evento e = ds.InsertEvento(Evento.TipoEvento.ACCAO_A, current_colmeia_id);
 		ver_colmeia.SetActive(true);
 		adicionar_evento.SetActive(false);
 		ShowEventos(current_colmeia_id);
@@ -69,7 +69,12 @@ public class InteractionManager : MonoBehaviour {
 		foreach(Evento e in eventos) {
 			GameObject evento = (GameObject)Instantiate(evento_prefab);
 			evento.transform.SetParent(events_panel.transform,false);
+			Transform data = evento.transform.GetChild(0); // Data
+			Debug.Log(e.date.Day);
+			data.GetComponent<Text>().text = e.date.ToString();
+
 		}
+		//date.te
 
 	}
 

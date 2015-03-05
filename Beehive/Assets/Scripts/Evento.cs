@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using SQLite4Unity3d;
+using System;
 
 public class Evento {
 	
@@ -8,9 +9,11 @@ public class Evento {
 	public int id { get; set; }
 	public int colmeia_id { get; set; }
 
-	public int day { get; set; }
+/*	public int day { get; set; }
 	public int month { get; set; }
 	public int year { get; set; }
+*/
+	public DateTime date { get; set; }
 
 	public enum TipoEvento {
 		
@@ -25,13 +28,14 @@ public class Evento {
 
 	public Evento(){}
 
-	public Evento(TipoEvento evento, int colmeia_id, int day, int month, int year)
+	public Evento(TipoEvento evento, int colmeia_id)
 	{
-		day = day;
-		month = month;
-		year = year;
-
+	/*	this.day = day;
+		this.month = month;
+		this.year = year;
+*/
 		tipo_evento = evento;
 		this.colmeia_id = colmeia_id;
+		date = DateTime.Now;
 	}
 }
